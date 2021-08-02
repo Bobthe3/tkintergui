@@ -1,16 +1,23 @@
+# dont really need this file anymore its in main
+
+
 # this func sets the working dir to the one stated in dirwanted variable 
 
-def dirfunc():
-    import subprocess,os
+def dirfunc(x):
+    import os
+    os.chdir(x)
 
-    dirwanted='/Users/devan'
 
-    proc=subprocess.Popen('pwd', shell=True, stdout=subprocess.PIPE, )
-    output=proc.communicate()[0]
+#  below is to get the path of the file you are in
+#  i wasted my time cus i could have done os.path.abspath("filename.")
+# import subprocess
 
-    currentdir=output.strip().decode("utf-8")
+# proc=subprocess.Popen('pwd', shell=True, stdout=subprocess.PIPE, )
+# output=proc.communicate()[0]
 
-    os.chdir(dirwanted)
+# currentdir=output.strip().decode("utf-8")
+    
+    
 
 #Notes
 # print(output)
