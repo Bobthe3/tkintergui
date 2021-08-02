@@ -1,29 +1,20 @@
-# import password # GET THE PASSWORDS FORM THE OTHER FILE
-# from applescript import tell
-# import applescript
-
-# #set what command you want to run here
-# yourCommand = 'ls'
-
-# applescript.tell.app("Terminal",'do script "ls"',background=False)
-
-# import appscript
-
-# appscript.app('Terminal').do_script('sudo killall "ControlStrip";')
-
 import os
-import password # from the password storer
+import password, changeworkdir # gets variables from the other files
 import tkinter as tk
 from tkinter import filedialog,Text
-import time
+
+
+
 
 def killcontrolstrip():
     label = tk.Label(frame,text="loppa",bg="white")
     label.pack()
 
 def openfiles():
-    os.system("open ~")
-    os.system("open Downloads")
+
+   changeworkdir.dirfunc() 
+   opendir = "downloads"
+   os.system("open "+opendir) 
 
 root =  tk.Tk() # creation of gui
 
@@ -47,4 +38,4 @@ root.mainloop() # this runs the script
 
 
 
-print("\n------------------\n completed, gracias \n ------------------")
+print("\n------------------\n completed \n ------------------")
