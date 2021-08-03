@@ -23,11 +23,9 @@ def openapps():
             os.system("open Applications/"+b)
    
 
-
-
 def switch_for_octal():
     global addapps
-    on = True
+    on = 
     if on == True:
         addOctal.config(image=ontoggle,text="Octal Added")
         addapps=['Octal.app']
@@ -35,7 +33,7 @@ def switch_for_octal():
         return addapps
     else:
         addOctal.config(image=offtoggle,text="Open Octal?")
-        on = True
+        
 
 root =  tk.Tk() # creation of gui
 
@@ -58,11 +56,10 @@ ontoggle = tk.PhotoImage(file="toggle(2).png")
 addOctal=tk.Button(frame, text="Open Octal",padx=2.5,pady=2.5,image=offtoggle,command=switch_for_octal)
 addOctal.pack()
 
-
-
+closetk=tk.Button(root, text="OPEN FILES",padx=40,pady=20,fg="#bf616a",bg="#2e3440",command=tkclose)
+closetk.pack()
 
 root.mainloop() # this runs the script
-
 
 
 print("\n------------------\n completed \n ------------------")
