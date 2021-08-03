@@ -1,11 +1,12 @@
 import os
-import password # gets variables from the other files
 import tkinter as tk
 from tkinter import filedialog,Text
 
 mainapplist = ['Firefox.app','Notion.app']
 addapps = []
-default = False # can change this to true
+#default = False # can change this to true
+
+
 def dirfunc(x):
     os.chdir(x)
 
@@ -16,11 +17,25 @@ def killcontrolstrip():
 def openapps():
    dirfunc(x='/')  # pass the parameter of what you want inside
    for a in mainapplist:
-    os.system("open Applications/"+a) 
+    os.system("open Applications/"+a)
+   if len(addapps)!=0:
+        for b in addapps:
+            os.system("open Applications/"+b)
+   
 
-def switch_for_octal(default):
-    if default == True:
-        addapps.append("Octal.app")
+
+
+def switch_for_octal():
+    global addapps
+    on = True
+    if on == True:
+        addOctal.config(image=ontoggle,text="Octal Added")
+        addapps=['Octal.app']
+        on = False
+        return addapps
+    else:
+        addOctal.config(image=offtoggle,text="Open Octal?")
+        on = True
 
 root =  tk.Tk() # creation of gui
 
@@ -36,9 +51,14 @@ killercont.pack()
 openfile=tk.Button(frame, text="OPEN FILES",padx=40,pady=20,fg="#bf616a",bg="#2e3440",command=openapps)
 openfile.pack()
 
-# this doesnt do anythign yet
-# openfile=tk.Button(root, text="Close",padx=10,pady=5,fg="#bf616a",bg="#2e3440")
-# openfiles.pack()
+offtoggle = tk.PhotoImage(file="toggle(1).png")
+ontoggle = tk.PhotoImage(file="toggle(2).png")
+
+
+addOctal=tk.Button(frame, text="Open Octal",padx=2.5,pady=2.5,image=offtoggle,command=switch_for_octal)
+addOctal.pack()
+
+
 
 
 root.mainloop() # this runs the script
