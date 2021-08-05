@@ -1,9 +1,12 @@
 import os
 import tkinter as tk
 from tkinter import filedialog,Text
+from PIL import Image, ImageTk
+
 
 mainapplist = []
 addapps = []
+
 #default = False # can change this to true
 
 
@@ -21,7 +24,13 @@ def killcontrolstrip():
     print("labeled loppa\n")
 
 def openapps():
-   dirfunc(x='/')  # pass the parameter of what you want inside
+   dirfunc(x='/') # pass the parameter of what you want inside
+   if len(mainapplist) == 0:
+       ("no main apps")
+
+   if len(addapps) == 0:
+       print("no add apps")
+
    if len(mainapplist)!=0:
     for a in mainapplist:
         os.system("open Applications/"+a)
@@ -32,34 +41,26 @@ def openapps():
             os.system("open Applications/"+b)
         print("inside not loop")
    
-
+octalswitchcase = 0
 def switch_for_octal():
-    global addapps
-    switchcase = 0
-    if (switchcase % 2) == 0:
+    global addapps, octalswitchcase
+
+    if (octalswitchcase % 2) == 0:
         addOctal.config(image=ontoggle,text="Octal Added")
         addapps=['Octal.app']
-        switchcase = switchcase + 1
-        print(switchcase)
-        print("this side")
+        octalswitchcase += 1
+        print(octalswitchcase)
         return addapps
-    else:
-        addOctal.config(image=offtoggle,text="Open Octal?")
-        print("L")
-        checker = "Octal.app" in addapps
-        if checker == True:
-            addapps.remove("Octal.app")
-            checkerlabel = tk.Label(frame,text="loppa",bg="white").pack()
-        switchcase = switchcase + 1
 
-    # if switchcase == True:
-    #     addOctal.config(image=ontoggle,text="Octal Added")
-    #     addapps=['Octal.app']
-    #     switchcase = False
-    #     return addapps
-    # else:
-    #     addOctal.config(image=offtoggle,text="Open Octal?")
-        
+    if (octalswitchcase % 2) !=0:
+        addOctal.config(image=offtoggle,text="Open Octal?")
+        octalcheck = "Octal.app" in addapps
+        if octalcheck == True:
+            addapps.remove("Octal.app")
+            octallabel = tk.Label(frame,text=" Added Octal",bg="white").pack() # adds a label to the thing
+        octalswitchcase += 1
+        return addapps
+
 
 root =  tk.Tk() # creation of gui
 
@@ -75,8 +76,16 @@ killercont.pack()
 openfile=tk.Button(frame, text="OPEN FILES",padx=40,pady=20,fg="#bf616a",bg="#2e3440",command=openapps)
 openfile.pack()
 
-offtoggle = tk.PhotoImage(file="toggle(1).png")
-ontoggle = tk.PhotoImage(file="toggle(2).png")
+# # setting image sizes 
+# qwerty = Image.open("toggle(1).png").resize((40,40))
+# offtoggle = tk.PhotoImage(qwerty)
+
+# qwerty = Image.open("toggle(2).png").resize((40,40))
+# ontoggle = tk.PhotoImage(qwerty)
+
+
+offtoggle = tk.PhotoImage(file="button_red.png")
+ontoggle = tk.PhotoImage(file="button_green.png")
 
 
 addOctal=tk.Button(frame, text="Open Octal",padx=2.5,pady=2.5,image=offtoggle,command=switch_for_octal)
