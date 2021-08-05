@@ -2,37 +2,63 @@ import os
 import tkinter as tk
 from tkinter import filedialog,Text
 
-mainapplist = ['Firefox.app','Notion.app']
+mainapplist = []
 addapps = []
 #default = False # can change this to true
 
 
+def tkclose():
+    global root
+    print("\napp has been closed")
+    root.destroy()
+
 def dirfunc(x):
     os.chdir(x)
+    print("----------------changed dir")
 
 def killcontrolstrip():
-    label = tk.Label(frame,text="loppa",bg="white")
-    label.pack()
+    label = tk.Label(frame,text="loppa",bg="white").pack()
+    print("labeled loppa\n")
 
 def openapps():
    dirfunc(x='/')  # pass the parameter of what you want inside
-   for a in mainapplist:
-    os.system("open Applications/"+a)
+   if len(mainapplist)!=0:
+    for a in mainapplist:
+        os.system("open Applications/"+a)
+    print(("for first loop"))
+
    if len(addapps)!=0:
         for b in addapps:
             os.system("open Applications/"+b)
+        print("inside not loop")
    
 
 def switch_for_octal():
     global addapps
-    on = 
-    if on == True:
+    switchcase = 0
+    if (switchcase % 2) == 0:
         addOctal.config(image=ontoggle,text="Octal Added")
         addapps=['Octal.app']
-        on = False
+        switchcase = switchcase + 1
+        print(switchcase)
+        print("this side")
         return addapps
     else:
         addOctal.config(image=offtoggle,text="Open Octal?")
+        print("L")
+        checker = "Octal.app" in addapps
+        if checker == True:
+            addapps.remove("Octal.app")
+            checkerlabel = tk.Label(frame,text="loppa",bg="white").pack()
+        switchcase = switchcase + 1
+
+    # if switchcase == True:
+    #     addOctal.config(image=ontoggle,text="Octal Added")
+    #     addapps=['Octal.app']
+    #     switchcase = False
+    #     return addapps
+    # else:
+    #     addOctal.config(image=offtoggle,text="Open Octal?")
         
 
 root =  tk.Tk() # creation of gui
@@ -56,7 +82,7 @@ ontoggle = tk.PhotoImage(file="toggle(2).png")
 addOctal=tk.Button(frame, text="Open Octal",padx=2.5,pady=2.5,image=offtoggle,command=switch_for_octal)
 addOctal.pack()
 
-closetk=tk.Button(root, text="OPEN FILES",padx=40,pady=20,fg="#bf616a",bg="#2e3440",command=tkclose)
+closetk=tk.Button(root, text="Close",padx=10,pady=5,fg="#bf616a",bg="#2e3440",command=tkclose)
 closetk.pack()
 
 root.mainloop() # this runs the script
