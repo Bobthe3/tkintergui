@@ -7,7 +7,8 @@ from PIL import Image, ImageTk
 mainapplist = []
 addapps = []
 
-#default = False # can change this to true
+
+
 
 
 def tkclose():
@@ -62,7 +63,20 @@ def switch_for_octal():
         return addapps
 
 
+def opendic():
+    os.system('cd /Users/devan;cd Library/Spelling;open LocalDictionary')
+
+def extract_data():
+    print(text_box.get('1.0', 'end'))
+    thing = text_box.get('1.0', 'end')
+    
+    os.system('cd /Users/devan;cd Library/Spelling;open LocalDictionary')
+
+
 root =  tk.Tk() # creation of gui
+root.title("MAJIC")
+offtoggle = tk.PhotoImage(file="button_red.png")
+ontoggle = tk.PhotoImage(file="button_green.png")
 
 canvas = tk.Canvas(root, height=700, width=700,bg="#d8dee9") # styling
 canvas.pack()# packaging the styling
@@ -73,20 +87,22 @@ frame.place(relwidth=0.8,relheight=0.8,relx=0.1,rely=0.1)
 killercont=tk.Button(frame, text="KILLLER",padx=10,pady=10,fg="#bf616a",bg="#2e3440",command=killcontrolstrip)
 killercont.pack()
 
+message = "loppa sandwhich"
+text_box = Text(
+    frame,
+    height=13,
+    width=40,
+    wrap='word'
+)
+text_box.pack(expand=True)
+text_box.insert('end', message)
+
+opendic = tk.Button(frame, text="Edit Personal Dictionary",padx=30,pady=10,fg="#bf616a",bg="#2e3440",command=extract_data)
+opendic.pack()
+
+
 openfile=tk.Button(frame, text="OPEN FILES",padx=40,pady=20,fg="#bf616a",bg="#2e3440",command=openapps)
 openfile.pack()
-
-# # setting image sizes 
-# qwerty = Image.open("toggle(1).png").resize((40,40))
-# offtoggle = tk.PhotoImage(qwerty)
-
-# qwerty = Image.open("toggle(2).png").resize((40,40))
-# ontoggle = tk.PhotoImage(qwerty)
-
-
-offtoggle = tk.PhotoImage(file="button_red.png")
-ontoggle = tk.PhotoImage(file="button_green.png")
-
 
 addOctal=tk.Button(frame, text="Open Octal",padx=2.5,pady=2.5,image=offtoggle,command=switch_for_octal)
 addOctal.pack()

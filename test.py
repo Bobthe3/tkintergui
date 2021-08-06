@@ -1,22 +1,40 @@
 # picture testing
 
-from tkinter import *
-from PIL import Image, ImageTk
+# from tkinter import *
+# import os
+
+
+# def tkclose():
+#     global root
+#     print("\napp has been closed")
+#     root.destroy()
+
+
+# def opendic():
+#     os.system('cd /Users/devan;cd Library/Spelling;open LocalDictionary')
+
+# # Create Tkinter Object
+# root = Tk()
  
-# Create Tkinter Object
-root = Tk()
- 
-# Read the Image
-image = Image.open("toggle(1).png").resize((40, 40))
-img12 = ImageTk.PhotoImage(image)
-label2 = Label(image=img12).pack()
+
+# qwer = Button(root, text="dic",padx=10,pady=10,fg="#bf616a",bg="#2e3440",command=opendic)
+# qwer.pack()
+
+# closetk=Button(root, text="Close",padx=10,pady=5,fg="#bf616a",bg="#2e3440",command=tkclose)
+# closetk.pack()
 
 
 
-# Reszie the image using resize() method
-# resize_image = image.resize((40, 40))
-# img = ImageTk.PhotoImage(resize_image)
-# label1 = Label(image=img).pack()
- 
-# Execute Tkinter
-root.mainloop()
+# root.mainloop()
+
+
+#######################
+
+
+f = open("myfile.txt", "a")
+f.write("Now the file has more content!\n")
+f.close()
+
+#open and read the file after the appending:
+f = open("myfile.txt", "r")
+print(f.read()) 
