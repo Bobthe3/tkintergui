@@ -5,15 +5,14 @@ from PIL import Image, ImageTk
 import pyautogui as pag
 import time
 
+###################################
 
 mainapplist = []
 addapps = []
 
 pag.FAILSAFE = True
 
-
-
-
+###################
 
 def tkclose():
     global root
@@ -80,34 +79,50 @@ def auto_dic():
     #opening the file
     os.system('cd /Users/devan;cd Library/Spelling;open LocalDictionary')
 
-
-    pag.moveTo(770,420,duration=1,tween=pag.easeOutElastic)
-    time.sleep(1)
-    pag.click(770, 420)
-    time.sleep(1)
+    pag.moveTo(770,420,duration=1)
+    pag.click(770, 420,duration=1)
     pag.typewrite(["enter"])
     pag.typewrite(textentered)
     time.sleep(1)
+    print("\n-------text entered\n")
     pag.click(156, 77)
     pag.hotkey("ctrl","s")
     pag.click(473,326)
+    print("______done________")
+
+
+
+
+##################################################################
+
 
 root =  tk.Tk() # creation of gui
 root.title("Magic Controller")
+
+#root rows weight
+
+# root.rowconfigure(0,weigth=1)
+
+
+#pictures
 offtoggle = tk.PhotoImage(file="button_red.png")
 ontoggle = tk.PhotoImage(file="button_green.png")
 
+
+
+# setting up layout
 canvas = tk.Canvas(root, height=700, width=700,bg="#d8dee9") # styling
 canvas.pack()# packaging the styling
 
 frame = tk.Frame(root,bg="#88c0d0")
 frame.place(relwidth=0.8,relheight=0.8,relx=0.1,rely=0.1)
 
-killercont=tk.Button(frame, text="KILLLER",padx=10,pady=10,fg="#bf616a",bg="#2e3440",command=killcontrolstrip)
-killercont.pack()
 
+# text box suff
 message = ""
 abovetext = tk.Label(frame,text="Enter The Word That You Would Like To Add To The Personal Dictionary Below", padx=10,pady=10,fg="#bf616a",bg="#2e3440")
+abovetext.pack()
+
 text_box = Text(
     frame,
     height=13,
@@ -117,12 +132,12 @@ text_box = Text(
 text_box.pack(expand=True)
 text_box.insert('end', message)
 
+# buttons
 opendic = tk.Button(frame, text="Auto Personal Dictionary",padx=30,pady=10,fg="#bf616a",bg="#2e3440",command=auto_dic)
 opendic.pack()
 
 mandic = tk.Button(frame, text="Manual Personal Dictionary",padx=30,pady=10,fg="#bf616a",bg="#2e3440",command=opendicfunc)
 mandic.pack()
-
 
 openfile=tk.Button(frame, text="Open Apps",padx=40,pady=20,fg="#bf616a",bg="#2e3440",command=openapps)
 openfile.pack()
@@ -130,10 +145,13 @@ openfile.pack()
 addOctal=tk.Button(frame, text="Open Octal",padx=2.5,pady=2.5,image=offtoggle,command=switch_for_octal)
 addOctal.pack()
 
+
+# root buttons
 closetk=tk.Button(root, text="Close",padx=10,pady=5,fg="#bf616a",bg="#2e3440",command=tkclose)
 closetk.pack()
 
-root.mainloop() # this runs the script
 
+
+root.mainloop() # this runs the script
 
 print("\n------------------\n completed \n ------------------")
