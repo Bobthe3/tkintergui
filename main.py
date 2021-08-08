@@ -112,10 +112,10 @@ ontoggle = tk.PhotoImage(file="button_green.png")
 
 # setting up layout
 canvas = tk.Canvas(root, height=700, width=700,bg="#d8dee9") # styling
-canvas.pack(relheight=1, relwidth=1)# packaging the styling
+canvas.pack(side = tk.TOP, fill = tk.BOTH, expand = True)# packaging the styling
 
 frame = tk.Frame(root,bg="#2e3440")
-frame.place(relwidth=0.8,relheight=0.8)
+frame.place(relwidth=0.8,relheight=0.8, ankor = )
 
 
 # text box suff
