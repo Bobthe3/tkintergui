@@ -15,9 +15,9 @@ pag.FAILSAFE = True
 ###################
 
 def tkclose():
-    global root
+    global frame
     print("\napp has been closed")
-    root.destroy()
+    frame.destroy()
 
 def dirfunc(x):
     os.chdir(x)
@@ -90,65 +90,106 @@ def auto_dic():
     pag.click(473,326)
     print("______done________")
 
-
-
-
 ##################################################################
 
 
 root =  tk.Tk() # creation of gui
 root.title("Magic Controller")
 
-#root rows weight
+frame = tk.Frame(root,bg="#2e3440")
+frame.pack()
+# frame.place(relwidth=0.8,relheight=0.8)
 
-# root.rowconfigure(0,weigth=1)
+# setting columns up
+frame.columnconfigure(0,weight = 1)
+frame.columnconfigure(1,weight = 1)
+frame.columnconfigure(2,weight = 1)
+frame.columnconfigure(3,weight = 1)
+frame.columnconfigure(4,weight = 1)
+frame.columnconfigure(5,weight = 1)
+frame.columnconfigure(6,weight = 1)
 
+# setting rows up, add multiple rows to the number of buttons wanted
+frame.rowconfigure(0, weight = 2)
+frame.rowconfigure(1, weight = 5)
+frame.rowconfigure(2, weight = 5)
+frame.rowconfigure(3, weight = 5)
+frame.rowconfigure(4, weight = 5)
+frame.rowconfigure(5, weight = 5)
+
+
+# setting up root frames and rows
+root.columnconfigure(1, weight = 1)
+root.columnconfigure(2, weight = 1)
+root.columnconfigure(3, weight = 1)
+
+root.rowconfigure(0, weight = 1)
 
 #pictures
+###################### got to make the buttons smaller so they fit in a 1-1 row/col weight
 offtoggle = tk.PhotoImage(file="button_red.png")
 ontoggle = tk.PhotoImage(file="button_green.png")
 
 
 
 # setting up layout
-canvas = tk.Canvas(root, height=700, width=700,bg="#d8dee9") # styling
-canvas.pack(side = tk.TOP, fill = tk.BOTH, expand = True)# packaging the styling
-
-frame = tk.Frame(root,bg="#2e3440")
-frame.place(relwidth=0.8,relheight=0.8, ankor = )
+# canvas = tk.Canvas(frame, height=700, width=700,bg="#d8dee9") # styling
+# canvas.pack(side = tk.TOP, fill = tk.BOTH, expand = True)# packaging the styling
 
 
+
+
+# ############# chaning all the the frames to frames to test grid system
 # text box suff
 message = ""
-abovetext = tk.Label(frame,text="Enter The Word That You Would Like To Add To The Personal Dictionary Below", padx=10,pady=10,fg="#bf616a",bg="#2e3440")
-abovetext.pack()
+abovetext = tk.Label(frame,text="\nEnter The Word That You Would Like \nTo Add To The Personal Dictionary Below\n", padx=10,pady=10,fg="#bf616a",bg="#2e3440")
+abovetext.grid(column = 0, row = 0, sticky = tk.NW)
 
 text_box = Text(
     frame,
-    height=13,
-    width=40,
-    wrap='word'
+    height=2,
+    width=10,
+    wrap='word',
+    fg="#bf616a",
+    bg="#2e3440"
 )
-text_box.pack(expand=True)
+text_box.grid(column = 1, row = 0, sticky = tk.NSEW, columnspan = 4)
 text_box.insert('end', message)
 
-# buttons
-opendic = tk.Button(frame, text="Auto Personal Dictionary",padx=30,pady=10,fg="#bf616a",bg="#2e3440",command=auto_dic)
-opendic.pack()
+# buttons!!!
 
-mandic = tk.Button(frame, text="Manual Personal Dictionary",padx=30,pady=10,fg="#bf616a",bg="#2e3440",command=opendicfunc)
-mandic.pack()
+#  add the option below or next to it asking the user if they want to save file auto aswell, 
+#  so i dont auto save everything and hove to fix it later
+#  keep this on dont save by or make the thing a bool so i can change the defualt value is wanted
+opendic = tk.Button(frame, text="Auto Add to Personal Dictionary",padx=30,pady=10,fg="#bf616a",bg="#2e3440",command=auto_dic)
+opendic.grid(column = 0, row = 1, sticky = tk.NSEW)
 
+mandic = tk.Button(frame, text="Manually Add to Dictionary",padx=30,pady=10,fg="#bf616a",bg="#2e3440",command=opendicfunc)
+mandic.grid(column = 1, row = 1, sticky = tk.NSEW)
+
+
+#  seperation rows
+# empty rows 
+emptylabel = tk.Label(frame, text="\n-\nö",fg="#bf616a",bg="#2e3440")
+emptylabel.grid(column=0, row=2, columnspan = 6, sticky = tk.NSEW)
+
+
+
+
+# open file stuff
 openfile=tk.Button(frame, text="Open Apps",padx=40,pady=20,fg="#bf616a",bg="#2e3440",command=openapps)
-openfile.pack()
+openfile.grid(column = 0, row = 3, sticky = tk.NSEW, columnspan  = 2)
 
-addOctal=tk.Button(frame, text="Open Octal",padx=2.5,pady=2.5,image=offtoggle,command=switch_for_octal)
-addOctal.pack()
+#  i put an emoji in the label so it will look weird on none mac users
+octallabel = tk.Label(frame, text="Open Octal? ➡️",fg="#bf616a",bg="#2e3440")
+octallabel.grid(column = 0, row = 4, sticky = tk.NSEW)
+addOctal=tk.Button(frame, text="Open Octal",padx=2.5,pady=2.5,image=offtoggle,command=switch_for_octal,fg="#bf616a",bg="#2e3440")
+addOctal.grid(column = 1, row = 4, sticky = tk.NW)
 
 
 # root buttons
-closetk=tk.Button(root, text="Close",padx=10,pady=5,fg="#bf616a",bg="#2e3440",command=tkclose)
-closetk.pack()
+# closetk=tk.Button(root, text="Close",padx=10,pady=5,fg="#bf616a",bg="#2e3440",command=tkclose)
+# closetk.grid()
 
 
 
