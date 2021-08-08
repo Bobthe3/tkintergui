@@ -10,9 +10,10 @@ import time
 mainapplist = []
 addapps = []
 
+
 pag.FAILSAFE = True
 
-###################
+# ###################
 
 def tkclose():
     global root
@@ -92,66 +93,96 @@ def auto_dic():
 
 
 
+root = tk.Tk()
+root.geometry("500x500")
+root.title("Magic Control")
 
-##################################################################
+root.columnconfigure(0,weight=1)
+root.columnconfigure(1,weight=2)
 
-
-root =  tk.Tk() # creation of gui
-root.title("Magic Controller")
-
-#root rows weight
-
-# root.rowconfigure(0,weigth=1)
-
-
-#pictures
-offtoggle = tk.PhotoImage(file="button_red.png")
-ontoggle = tk.PhotoImage(file="button_green.png")
+root.rowconfigure(0,weight=1)
+root.rowconfigure(1,weight=2)
 
 
+lab = tk.Label(root,text="Killer",bg="#000",fg="#fff")
+lab.grid(column=0,row=0, sticky= tk.W, padx=5, pady=5)
 
-# setting up layout
-canvas = tk.Canvas(root, height=700, width=700,bg="#d8dee9") # styling
-canvas.pack(relheight=1, relwidth=1)# packaging the styling
+lab1 = tk.Label(root,text="Beans to killer",bg="#300",fg="#fff")
+lab1.grid(column=1,row=0, sticky= tk.W)
+
 
 frame = tk.Frame(root,bg="#2e3440")
-frame.place(relwidth=0.8,relheight=0.8)
+frame.grid(row = 1, column = 1)
 
 
-# text box suff
-message = ""
-abovetext = tk.Label(frame,text="Enter The Word That You Would Like To Add To The Personal Dictionary Below", padx=10,pady=10,fg="#bf616a",bg="#2e3440")
-abovetext.pack()
-
-text_box = Text(
-    frame,
-    height=13,
-    width=40,
-    wrap='word'
-)
-text_box.pack(expand=True)
-text_box.insert('end', message)
-
-# buttons
-opendic = tk.Button(frame, text="Auto Personal Dictionary",padx=30,pady=10,fg="#bf616a",bg="#2e3440",command=auto_dic)
-opendic.pack()
-
-mandic = tk.Button(frame, text="Manual Personal Dictionary",padx=30,pady=10,fg="#bf616a",bg="#2e3440",command=opendicfunc)
-mandic.pack()
-
-openfile=tk.Button(frame, text="Open Apps",padx=40,pady=20,fg="#bf616a",bg="#2e3440",command=openapps)
-openfile.pack()
-
-addOctal=tk.Button(frame, text="Open Octal",padx=2.5,pady=2.5,image=offtoggle,command=switch_for_octal)
-addOctal.pack()
-
-
-# root buttons
-closetk=tk.Button(root, text="Close",padx=10,pady=5,fg="#bf616a",bg="#2e3440",command=tkclose)
-closetk.pack()
+root.mainloop()
 
 
 
-root.mainloop() # this runs the script
 
-print("\n------------------\n completed \n ------------------")
+
+# ##################################################################
+
+
+# root =  tk.Tk() # creation of gui
+# root.title("Magic Controller")
+
+# #root rows weight
+
+# # root.rowconfigure(0,weigth=1)
+
+
+# #pictures
+# offtoggle = tk.PhotoImage(file="button_red.png")
+# ontoggle = tk.PhotoImage(file="button_green.png")
+
+
+
+# # setting up layout
+# canvas = tk.Canvas(root, height=700, width=700,bg="#d8dee9") # styling
+# canvas.pack()# packaging the styling
+
+# frame = tk.Frame(root,bg="#88c0d0")
+# frame.place(relwidth=0.8,relheight=0.8,relx=0.1,rely=0.1)
+
+
+# # text box suff
+# message = ""
+# abovetext = tk.Label(frame,text="Enter The Word That You Would Like To Add To The Personal Dictionary Below", padx=10,pady=10,fg="#bf616a",bg="#2e3440")
+# abovetext.pack()
+
+# text_box = Text(
+#     frame,
+#     height=13,
+#     width=40,
+#     wrap='word'
+# )
+# text_box.pack(expand=True)
+# text_box.insert('end', message)
+
+# # buttons
+# opendic = tk.Button(frame, text="Auto Personal Dictionary",padx=30,pady=10,fg="#bf616a",bg="#2e3440",command=auto_dic)
+# opendic.pack()
+
+# mandic = tk.Button(frame, text="Manual Personal Dictionary",padx=30,pady=10,fg="#bf616a",bg="#2e3440",command=opendicfunc)
+# mandic.pack()
+
+# openfile=tk.Button(frame, text="Open Apps",padx=40,pady=20,fg="#bf616a",bg="#2e3440",command=openapps)
+# openfile.pack()
+
+# addOctal=tk.Button(frame, text="Open Octal",padx=2.5,pady=2.5,image=offtoggle,command=switch_for_octal)
+# addOctal.pack()
+
+
+# # root buttons
+# closetk=tk.Button(root, text="Close",padx=10,pady=5,fg="#bf616a",bg="#2e3440",command=tkclose)
+# closetk.pack()
+
+
+
+# root.mainloop() # this runs the script
+
+# print("\n------------------\n completed \n ------------------")
+
+
+
