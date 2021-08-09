@@ -1,7 +1,6 @@
 import os
 import tkinter as tk
 from tkinter import filedialog,Text
-from PIL import Image, ImageTk
 import pyautogui as pag
 import time
 
@@ -9,8 +8,6 @@ import time
 
 mainapplist = []
 addapps = []
-
-pag.FAILSAFE = True
 
 ###################
 
@@ -23,9 +20,9 @@ def dirfunc(x):
     os.chdir(x)
     print("----------------changed dir")
 
-def killcontrolstrip():
-    label = tk.Label(frame,text="loppa",bg="white").pack()
-    print("labeled loppa\n")
+# def killcontrolstrip():
+#     label = tk.Label(frame,text="loppa",bg="white").pack()
+#     print("labeled loppa\n")
 
 def openapps():
    dirfunc(x='/') # pass the parameter of what you want inside
@@ -67,29 +64,6 @@ def switch_for_octal():
         octalswitchcase += 1
         return addapps
 
-def opendicfunc():
-    # func just opesn the local dic
-    os.system('cd /Users/devan;cd Library/Spelling;open LocalDictionary')
-    
-def auto_dic():
-    # func does the auto dic and add word from text box
-    print(text_box.get('1.0', 'end'))
-    textentered = text_box.get('1.0', 'end')
-    
-    #opening the file
-    os.system('cd /Users/devan;cd Library/Spelling;open LocalDictionary')
-
-    pag.moveTo(770,420,duration=1)
-    pag.click(770, 420,duration=1)
-    pag.typewrite(["enter"])
-    pag.typewrite(textentered)
-    time.sleep(1)
-    print("\n-------text entered\n")
-    pag.click(156, 77)
-    pag.hotkey("ctrl","s")
-    pag.click(473,326)
-    print("______done________")
-
 ##################################################################
 
 
@@ -97,7 +71,7 @@ root =  tk.Tk() # creation of gui
 root.title("Magic Controller")
 
 frame = tk.Frame(root,bg="#2e3440")
-frame.pack()
+
 # frame.place(relwidth=0.8,relheight=0.8)
 
 # setting columns up
@@ -117,6 +91,10 @@ frame.rowconfigure(3, weight = 5)
 frame.rowconfigure(4, weight = 5)
 frame.rowconfigure(5, weight = 5)
 
+
+#  this needs to be here rather then the pack above this,
+#  probelm is that i forgor 
+frame.place(in_ = root, relheight = 0.9, relwidth = 0.9, anchor = "center" )
 
 # setting up root frames and rows
 root.columnconfigure(1, weight = 1)
@@ -141,50 +119,29 @@ ontoggle = tk.PhotoImage(file="button_green.png")
 
 # ############# chaning all the the frames to frames to test grid system
 # text box suff
-message = ""
-abovetext = tk.Label(frame,text="\nEnter The Word That You Would Like \nTo Add To The Personal Dictionary Below\n", padx=10,pady=10,fg="#bf616a",bg="#2e3440")
-abovetext.grid(column = 0, row = 0, sticky = tk.NW)
-
-text_box = Text(
-    frame,
-    height=2,
-    width=10,
-    wrap='word',
-    fg="#bf616a",
-    bg="#2e3440"
-)
-text_box.grid(column = 1, row = 0, sticky = tk.NSEW)
-text_box.insert('end', message)
-
-# buttons!!!
-
-#  add the option below or next to it asking the user if they want to save file auto aswell, 
-#  so i dont auto save everything and hove to fix it later
-#  keep this on dont save by or make the thing a bool so i can change the defualt value is wanted
-opendic = tk.Button(frame, text="Auto Add to Personal Dictionary",padx=30,pady=10,fg="#bf616a",bg="#2e3440",command=auto_dic)
-opendic.grid(column = 0, row = 1, sticky = tk.NSEW)
-
-mandic = tk.Button(frame, text="Manually Add to Dictionary",padx=30,pady=10,fg="#bf616a",bg="#2e3440",command=opendicfunc)
-mandic.grid(column = 1, row = 1, sticky = tk.NSEW)
 
 
 #  seperation rows
 # empty rows 
-emptylabel = tk.Label(frame, text="\n-\nö",fg="#bf616a",bg="#2e3440")
-emptylabel.grid(column=0, row=2, columnspan = 6, sticky = tk.NSEW)
+emptylabel = tk.Label(frame, text="\n \n",fg="#bf616a",bg="#2e3440")
+emptylabel.grid(column=0, row=2, sticky = tk.NSEW)
 
 
-
+# i litterly just recreated padding i have to fix this with the frame sizing and chnageing the root info
+emptyrowlab = tk.Label(frame,text="\n\n\n\n         \n\n\n",fg="#bf616a",bg="#2e3440")
+emptyrowlab.grid(column = 3, rowspan = 3, sticky = tk.NSEW)
+emptyrowlab = tk.Label(frame,text="\n\n\n\n         \n\n\n",fg="#bf616a",bg="#2e3440")
+emptyrowlab.grid(column = 0, rowspan = 3, sticky = tk.NSEW)
 
 # open file stuff
 openfile=tk.Button(frame, text="Open Apps",padx=40,pady=20,fg="#bf616a",bg="#2e3440",command=openapps)
-openfile.grid(column = 0, row = 3, sticky = tk.NSEW, columnspan  = 2)
+openfile.grid(column = 1, row = 3, sticky = tk.NSEW, columnspan = 2)
 
 #  i put an emoji in the label so it will look weird on none mac users
-octallabel = tk.Label(frame, text="Open Octal? ➡️",fg="#bf616a",bg="#2e3440")
-octallabel.grid(column = 0, row = 4, sticky = tk.NSEW)
-addOctal=tk.Button(frame, text="Open Octal",padx=2.5,pady=2.5,image=offtoggle,command=switch_for_octal,fg="#bf616a",bg="#2e3440")
-addOctal.grid(column = 1, row = 4, sticky = tk.NW)
+octallabel = tk.Label(frame, text="➡️\n➡️ Open Octal? ➡️\n➡️",fg="#bf616a",bg="#2e3440")
+octallabel.grid(column = 1, row = 4, sticky = tk.NSEW)
+addOctal=tk.Button(frame, text="Open Octal",image=offtoggle,command=switch_for_octal,fg="#bf616a",bg="#2e3440")
+addOctal.grid(column = 2, row = 4, sticky = tk.NW)
 
 
 # root buttons
