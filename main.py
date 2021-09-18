@@ -101,6 +101,29 @@ def mouseControl():
     os_input="defaults write -g com.apple.mouse.scaling "+input_number
     os.system(os_input)
     return print("you have to restart your mac then it will come into effect")
+
+
+def onpowerSignal():
+    os.system("defaults write com.apple.PowerChime ChimeOnAllHardware -bool true; open /System/Library/CoreServices/PowerChime.app")
+    return ("power signal On")
+
+def offpowerSignal():
+    os.system("defaults write com.apple.PowerChime ChimeOnAllHardware -bool false; open /System/Library/CoreServices/PowerChime.app")
+    return ("power signal Off")
+
+def speaker():
+    textentered = text_box.get('1.0', 'end')
+    systemOutput = "say "+textentered
+    os.system(systemOutput)
+
+def caffeine():
+    textentered = text_box.get('1.0', 'end')
+    print(type(textentered))
+    a = int(textentered)
+    systemOutput = "caffeinate -t" + str(a)
+    os.system(systemOutput)
+    
+
 ##################################################################
 
 
@@ -181,10 +204,8 @@ mandic.grid(column = 1, row = 1, sticky = tk.NSEW)
 
 #  seperation rows
 # empty rows 
-emptylabel = tk.Label(frame, text="\n-\nö",fg="#bf616a",bg="#2e3440")
-emptylabel.grid(column=0, row=2, columnspan = 6, sticky = tk.NSEW)
-
-
+emptylabel = tk.Label(frame, text="\n______________________________________\n",fg="#bf616a",bg="#2e3440")
+emptylabel.grid(column=0, row=8, columnspan = 6, sticky = tk.NSEW)
 
 
 # open file stuff
@@ -204,8 +225,8 @@ emptylabel.grid(column=0, row=5, columnspan = 6, sticky = tk.NSEW)
 ## mouse control addition should call to the mouseControl Func()
 message = ""
 mouse = os.system("defaults read -g com.apple.mouse.scaling")
-abovetext = tk.Label(frame,text=("\nEnter the value if you want to change mouse control speed\n\nNOTE: \nThis will only go into affect when you restart your Mac"), padx=10,pady=10,fg="#bf616a",bg="#2e3440")
-abovetext.grid(column = 0, row = 6, sticky = tk.NW)
+abovetext1 = tk.Label(frame,text=("\nEnter the value if you want to change mouse control speed\n\nNOTE: \nThis will only go into affect when you restart your Mac"), padx=10,pady=10,fg="#bf616a",bg="#2e3440")
+abovetext1.grid(column = 0, row = 6, sticky = tk.NW)
 
 text_box = Text(
     frame,
@@ -221,6 +242,50 @@ text_box.insert('end', message)
 mousebutton=tk.Button(frame, text="Change Mouse Value",width=25,padx=2.5,pady=2.5,command=mouseControl,fg="#bf616a",bg="#2e3440")
 mousebutton.grid(column = 1, row = 7, sticky = tk.NW)
 
+emptylabel = tk.Label(frame, text="\n______________________________________\n",fg="#bf616a",bg="#2e3440")
+emptylabel.grid(column=0, row=8, columnspan = 6, sticky = tk.NSEW)
+
+## Speaker text box and instructions 
+message = ""
+abovetext2 = tk.Label(frame,text=("\nEnter text that you would like to be spoke allowed\n\nNOTE:\nThis will be spoken allowed so watch your tone"), padx=10,pady=10,fg="#bf616a",bg="#2e3440")
+abovetext2.grid(column = 0, row = 9, sticky = tk.NW)
+
+text_box = Text(
+    frame,
+    height=2,
+    width=10,
+    wrap='word',
+    fg="#bf616a",
+    bg="#2e3440"
+)
+text_box.grid(column = 1, row = 9, sticky = tk.NSEW)
+text_box.insert('end', message)
+    # button to call the function
+mousebutton=tk.Button(frame, text="Speak",width=25,padx=2.5,pady=2.5,command=speaker,fg="#bf616a",bg="#2e3440")
+mousebutton.grid(column = 1, row = 10, sticky = tk.NW)
+
+# empty line
+emptylabel = tk.Label(frame, text="\n______________________________________\n",fg="#bf616a",bg="#2e3440")
+emptylabel.grid(column=0, row=11, columnspan = 6, sticky = tk.NSEW)
+
+# caffinate text box and print
+message = ""
+abovetext2 = tk.Label(frame,text=("\nEnter how long you would like to caffeinate for in minutes\n\nNOTE:\nOnly minutes, seconds will return an error"), padx=10,pady=10,fg="#bf616a",bg="#2e3440")
+abovetext2.grid(column = 2, row = 0, sticky = tk.NW)
+
+text_box = Text(
+    frame,
+    height=2,
+    width=10,
+    wrap='word',
+    fg="#bf616a",
+    bg="#2e3440"
+)
+text_box.grid(column = 3, row = 0, sticky = tk.NSEW)
+text_box.insert('end', message)
+    # button to call the function
+mousebutton=tk.Button(frame, text="Caffeinate",width=25,padx=2.5,pady=2.5,command=caffeine,fg="#bf616a",bg="#2e3440")
+mousebutton.grid(column = 3, row = 1, sticky = tk.NW)
 
 # root buttons
 # closetk=tk.Button(root, text="Close",padx=10,pady=5,fg="#bf616a",bg="#2e3440",command=tkclose)
