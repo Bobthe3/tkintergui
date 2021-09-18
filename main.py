@@ -90,6 +90,17 @@ def auto_dic():
     pag.click(473,326)
     print("______done________")
 
+def mouseControl():
+    input_number = text_box.get('1.0', 'end')
+    # print(type(input_number))
+
+    # print(os.system("defaults read -g com.apple.mouse.scaling"))
+    # f = os.system("defaults read -g com.apple.mouse.scaling")
+    # print(f,"dfghjkl")
+
+    os_input="defaults write -g com.apple.mouse.scaling "+input_number
+    os.system(os_input)
+    return print("you have to restart your mac then it will come into effect")
 ##################################################################
 
 
@@ -140,7 +151,7 @@ ontoggle = tk.PhotoImage(file="button_green.png")
 
 
 # ############# chaning all the the frames to frames to test grid system
-# text box suff
+# text box stuff
 message = ""
 abovetext = tk.Label(frame,text="\nEnter The Word That You Would Like \nTo Add To The Personal Dictionary Below\n", padx=10,pady=10,fg="#bf616a",bg="#2e3440")
 abovetext.grid(column = 0, row = 0, sticky = tk.NW)
@@ -185,6 +196,30 @@ octallabel = tk.Label(frame, text="Open Octal? ➡️",fg="#bf616a",bg="#2e3440"
 octallabel.grid(column = 0, row = 4, sticky = tk.NSEW)
 addOctal=tk.Button(frame, text="Open Octal",padx=2.5,pady=2.5,image=offtoggle,command=switch_for_octal,fg="#bf616a",bg="#2e3440")
 addOctal.grid(column = 1, row = 4, sticky = tk.NW)
+
+# speration rows
+emptylabel = tk.Label(frame, text="\n______________________________________\n",fg="#bf616a",bg="#2e3440")
+emptylabel.grid(column=0, row=5, columnspan = 6, sticky = tk.NSEW)
+
+## mouse control addition should call to the mouseControl Func()
+message = ""
+mouse = os.system("defaults read -g com.apple.mouse.scaling")
+abovetext = tk.Label(frame,text=("\nEnter the value if you want to change mouse control speed\n\nNOTE: \nThis will only go into affect when you restart your Mac"), padx=10,pady=10,fg="#bf616a",bg="#2e3440")
+abovetext.grid(column = 0, row = 6, sticky = tk.NW)
+
+text_box = Text(
+    frame,
+    height=2,
+    width=10,
+    wrap='word',
+    fg="#bf616a",
+    bg="#2e3440"
+)
+text_box.grid(column = 1, row = 6, sticky = tk.NSEW)
+text_box.insert('end', message)
+    # button for the change button
+mousebutton=tk.Button(frame, text="Change Mouse Value",width=25,padx=2.5,pady=2.5,command=mouseControl,fg="#bf616a",bg="#2e3440")
+mousebutton.grid(column = 1, row = 7, sticky = tk.NW)
 
 
 # root buttons
